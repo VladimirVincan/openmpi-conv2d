@@ -1,5 +1,8 @@
 #!/bin/bash
 
+mkdir outputs/
+mkdir input/
+
 echo "3 3 3 3 generic" > mat_size.txt
 ./run_single.sh
 rm  outputs/*matrix.txt
@@ -23,3 +26,6 @@ echo "1000 1000 1000 1000 generic" > mat_size.txt
 rm  outputs/*matrix.txt
 mkdir results/mat_1000x1000_1000x1000/
 mv outputs/* results/mat_1000x1000_1000x1000/
+
+rm -r outputs/
+rm -r input/
