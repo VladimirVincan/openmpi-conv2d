@@ -20,22 +20,20 @@ void conv2(int const &ah, int const &aw, int const &bh, int const &bw, int &ch,
   // convolution
   for (int ci = 0; ci < ch; ++ci)
     for (int cj = 0; cj < cw; ++cj) {
-      // clang-format off
-      int aw_start = std::max(0, cj - bw + 1),
-          // bw_start = std::max(0, cj - aw + 1),
-          aw_end = std::min(aw, cj + 1),
-          bw_end = std::min(bw, cj + 1),
-          ah_start = std::max(0, ci - bh + 1),
-          // bh_start = std::max(0, ci - ah + 1),
-          ah_end = std::min(ah, ci + 1),
-          bh_end = std::min(bh, ci + 1),
-          wlen = aw_end - aw_start, // same as bw_end - bw_start
-          hlen = ah_end - ah_start; // same as bh_end - bh_start
-      // clang-format on
+      int aw_start = std::max(0, cj - bw + 1);
+      // int bw_start = std::max(0, cj - aw + 1);
+      int aw_end = std::min(aw, cj + 1);
+      int bw_end = std::min(bw, cj + 1);
+      int ah_start = std::max(0, ci - bh + 1);
+      // int bh_start = std::max(0, ci - ah + 1);
+      int ah_end = std::min(ah, ci + 1);
+      int bh_end = std::min(bh, ci + 1);
+      int wlen = aw_end - aw_start;  // same as bw_end - bw_start
+      int hlen = ah_end - ah_start;  // same as bh_end - bh_start
       for (int i = 0; i < hlen; ++i)
         for (int j = 0; j < wlen; ++j)
           c[ci][cj] +=
-            a[ah_start + i][aw_start + j] * b[bh_end - i - 1][bw_end - j - 1];
+              a[ah_start + i][aw_start + j] * b[bh_end - i - 1][bw_end - j - 1];
     }
 }
 
@@ -60,14 +58,13 @@ void write(char const *const matrix_file_name, char const *const time_file_name,
            std::chrono::steady_clock::time_point const begin,
            std::chrono::steady_clock::time_point const end, int const &ch,
            int const &cw, double const *const *const conv) {
-  print_matrix(ch, cw, conv);
-  // fprint_matrix(matrix_file_name, ch, cw, conv);
+  // print_matrix(ch, cw, conv);
+  fprint_matrix(matrix_file_name, ch, cw, conv);
 
-  // ofstream f(time_file_name, std::ios_base::app);
-  // f << std::chrono::duration_cast<std::chrono::nanoseconds>(end -
-  // begin).count()
-  //   << std::endl;
-  // f.close();
+  ofstream f(time_file_name, std::ios_base::app);
+  f << std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin).count()
+    << std::endl;
+  f.close();
 }
 
 int main() {
