@@ -3,7 +3,7 @@ rm outputs/*
 rm input/*
 mkdir outputs
 mkdir input
-iterations=4
+iterations=50
 threads=6
 for ((i = 0 ; i < $iterations ; i++)); do
     # echo "iteration = $i"
