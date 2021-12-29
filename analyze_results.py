@@ -62,15 +62,15 @@ for i in mat_size:
               line[j[5]-1] = j[6]
     plt.plot(threads, line)
 
-    line = np.zeros(len(threads))
-    for j in results:
-        if j[0] == i:
-            if j[7] == 1:
-              line[j[5]-1] = j[6]
-    plt.plot(threads, line)
+    # line = np.zeros(len(threads))
+    # for j in results:
+    #     if j[0] == i:
+    #         if j[7] == 1:
+    #           line[j[5]-1] = j[6]
+    # plt.plot(threads, line)
 
     plt.xlabel("Number of threads")
     plt.ylabel("Average time [ns]")
     plt.title("Matrix size: " + str(i))
     plt.savefig("results/mat_size_" + str(i) + ".png")
-    plt.figure()
+    # plt.figure()
